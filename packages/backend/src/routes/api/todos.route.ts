@@ -4,7 +4,6 @@ import { validateBody } from '../../middlewares/validateBody.middleware';
 import { isExist } from '../../middlewares/isExist.middleware';
 import todoController from '../../controllers/todo.controller';
 
-
 const todosRouter: Router = Router();
 
 todosRouter.get('', todoController.getAllTodo.bind(todoController));
