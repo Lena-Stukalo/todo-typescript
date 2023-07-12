@@ -1,15 +1,26 @@
+/* eslint-disable prettier/prettier */
 import { Router } from 'express';
 
 import { validateBody } from '../../middlewares/validateBody.middleware';
 import { isExist } from '../../middlewares/isExist.middleware';
+import { tryCatch } from '../../middlewares/tryCatch.middleware';
 import todoController from '../../controllers/todo.controller';
+import { Todo } from '../../entities/todo.entity';
 
 const todosRouter: Router = Router();
 
-todosRouter.get('', todoController.getAllTodo.bind(todoController));
-todosRouter.get('/:todoId', isExist, todoController.getByIdTodo.bind(todoController));
-todosRouter.post('', validateBody, todoController.createTodo.bind(todoController));
-todosRouter.patch('/:todoId', isExist, todoController.updateByIdTodo.bind(todoController));
-todosRouter.delete('/:todoId', isExist, todoController.deleteByIdTodo.bind(todoController));
+todosRouter.get('', tryCatch(todoController.getAllTodo.bind(todoController)));
+todosRouter.get('/:todoId', isExist(Todo), tryCatch(todoController.getByIdTodo.bind(todoController)));
+todosRouter.post('', validateBody, tryCatch(todoController.createTodo.bind(todoController)));
+todosRouter.patch(
+    '/:todoId',
+    isExist(Todo),
+    tryCatch(todoController.updateByIdTodo.bind(todoController))
+);
+todosRouter.delete(
+    '/:todoId',
+    isExist(Todo),
+    tryCatch(todoController.deleteByIdTodo.bind(todoController))
+);
 
 export default todosRouter;

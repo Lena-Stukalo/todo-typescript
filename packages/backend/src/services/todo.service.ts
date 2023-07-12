@@ -13,8 +13,7 @@ export default class TodoService {
   }
 
   async create(data: ITodo) {
-    const { title, description, isDone, isPrivat } = data;
-    const result = await Todo.create({ title, description, isDone, isPrivat });
+    const result = await Todo.create({ ...data });
     result.save();
     return result;
   }

@@ -1,6 +1,5 @@
 import { Response, Request } from 'express';
 import TodoService from '../services/todo.service';
-import { ErrorWithStatus } from '../types/error.type';
 
 export class TodoController {
   // eslint-disable-next-line prettier/prettier
@@ -12,13 +11,8 @@ export class TodoController {
   }
 
   async getByIdTodo(req: Request, res: Response) {
-    try {
-      const todos = await this.todoService.findById(req.params.todoId);
-      res.send(todos);
-    } catch (err) {
-      const e = err as ErrorWithStatus;
-      res.status(e.status).json(e.message);
-    }
+    const todos = await this.todoService.findById(req.params.todoId);
+    res.send(todos);
   }
 
   async createTodo(req: Request, res: Response) {

@@ -33,8 +33,9 @@ const connectDB = async () => {
     });
     await AppDataSource.initialize();
     console.log('Postgres Connected...');
-  } catch (err: any) {
-    console.error(err.message);
+  } catch (err) {
+    const e = err as Error;
+    console.error(e.message);
     // Exit process with failure
     process.exit(1);
   }
