@@ -11,7 +11,7 @@ export class TodoController {
   }
 
   async getByIdTodo(req: Request, res: Response) {
-    const todos = await this.todoService.findById(req.params.todoId);
+    const todos = await this.todoService.findById(req.params.id);
     res.send(todos);
   }
 
@@ -21,12 +21,12 @@ export class TodoController {
   }
 
   async updateByIdTodo(req: Request, res: Response) {
-    const todos = await this.todoService.update(req.params.todoId, req.body);
+    const todos = await this.todoService.update(req.params.id, req.body);
     res.send(todos);
   }
 
   async deleteByIdTodo(req: Request, res: Response) {
-    const todos = await this.todoService.delete(req.params.todoId);
+    const todos = await this.todoService.delete(req.params.id);
     res.send(todos);
   }
 }

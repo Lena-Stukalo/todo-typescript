@@ -8,8 +8,8 @@ export const isExist =
   <T extends BaseEntity>(Entitys: typeof BaseEntity) =>
     async (req: Request, res: Response, next: NextFunction) => {
       try {
-        const { todoId } = req.params;
-        const result = await Entitys.findOneBy({ id: todoId } as unknown as FindOptionsWhere<T>);
+        const { id } = req.params;
+        const result = await Entitys.findOneBy({ id } as unknown as FindOptionsWhere<T>);
         if (!result) {
           throw new Error('Not found');
         }

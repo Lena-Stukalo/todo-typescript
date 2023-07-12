@@ -10,15 +10,15 @@ import { Todo } from '../../entities/todo.entity';
 const todosRouter: Router = Router();
 
 todosRouter.get('', tryCatch(todoController.getAllTodo.bind(todoController)));
-todosRouter.get('/:todoId', isExist(Todo), tryCatch(todoController.getByIdTodo.bind(todoController)));
+todosRouter.get('/:id', isExist(Todo), tryCatch(todoController.getByIdTodo.bind(todoController)));
 todosRouter.post('', validateBody, tryCatch(todoController.createTodo.bind(todoController)));
 todosRouter.patch(
-    '/:todoId',
+    '/:id',
     isExist(Todo),
     tryCatch(todoController.updateByIdTodo.bind(todoController))
 );
 todosRouter.delete(
-    '/:todoId',
+    '/:id',
     isExist(Todo),
     tryCatch(todoController.deleteByIdTodo.bind(todoController))
 );
