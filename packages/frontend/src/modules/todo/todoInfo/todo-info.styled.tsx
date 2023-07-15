@@ -1,0 +1,58 @@
+/* eslint-disable prettier/prettier */
+import styled from 'styled-components';
+import * as theme from '../../theme';
+
+export const Info = styled('div')`
+  font-family: ${theme.FONTS.FAMILIES.normal};
+  padding: 20px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+    1px 4px 6px rgba(0, 0, 0, 0.16);
+  width: 100%;
+`;
+export const Title = styled('h2')`
+  font-family: ${theme.FONTS.WEIGHTS.bold};
+  font-size: ${theme.FONTS.SIZES.l};
+  text-align: center;
+  margin-bottom: 20px;
+`;
+export const Description = styled('p')`
+  font-family: ${theme.FONTS.WEIGHTS.normal};
+  font-size: ${theme.FONTS.SIZES.m};
+`;
+export const Wraper = styled('div')`
+  margin-bottom: 10px;
+`;
+export const CheckBoxLabel = styled('label')`
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  font-family: ${theme.FONTS.WEIGHTS.normal};
+  font-size: ${theme.FONTS.SIZES.m};
+`;
+export const Button = styled('button')`
+  max-width: 100px;
+  height: 30px;
+  left: 20px;
+  color: #ffffff;
+  border: 1px solid #28abe8;
+  border-radius: 5px;
+  background-color: #28abe8;
+  font-size: ${theme.FONTS.SIZES.m};
+  text-align: center;
+
+  &:hover {
+    background: #ffffff;
+    border: 1px solid #28abe8;
+    color: #28abe8;
+    transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+`;
+export const ButtonWraper = styled('div')`
+  display: flex;
+  justify-content: space-around;
+`;
+export const CardText = styled('p')`
+  font-family: ${theme.FONTS.WEIGHTS.normal};
+  font-size: ${theme.FONTS.SIZES.m};
+  margin-right: 10px;
+`;

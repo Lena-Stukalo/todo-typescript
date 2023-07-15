@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { createGlobalStyle } from 'styled-components';
 import { COLORS } from '../theme';
 
@@ -20,7 +21,6 @@ export const GlobalStyles = createGlobalStyle`
   h3,
   h4,
   p,
-  ul[class],
   ol[class],
   li,
   figure,
