@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import {
   FormStyled,
@@ -26,17 +26,6 @@ export const TodoFormComponent: React.FC<IProps> = ({
   card,
   text,
 }) => {
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    isDone: false,
-    isPrivate: false
-  });
-  useEffect(() => {
-    if (card) {
-      setFormData({ ...card });
-    }
-  }, [card]);
   const handeleSubmit = (values:object) => {
     if (card) {
       onSubmit(card.id, { ...card, ...values });
@@ -67,7 +56,7 @@ export const TodoFormComponent: React.FC<IProps> = ({
           id="title"
           required
           onChange={formik.handleChange}
-          value={formik.values.title || formData.title}
+          value={formik.values.title}
         />
       </Label>
       <ModalWrapper />
@@ -80,7 +69,7 @@ export const TodoFormComponent: React.FC<IProps> = ({
           id="description"
           placeholder="Type desctiption"
           onChange={formik.handleChange}
-          value={formik.values.description || formData.description}
+          value={formik.values.description}
         />
       </ModalWrapper>
       <ChecboxLabel>
@@ -88,7 +77,7 @@ export const TodoFormComponent: React.FC<IProps> = ({
         <FormCustomChecbox
           name="isDone"
           onChange={formik.handleChange}
-          value={formik.values.isDone || formData.isDone}
+          value={formik.values.isDone}
         />
       </ChecboxLabel>
 
@@ -97,7 +86,7 @@ export const TodoFormComponent: React.FC<IProps> = ({
         <FormCustomChecbox
           name="isPrivate"
           onChange={formik.handleChange}
-          value={formik.values.isPrivate || formData.isPrivate}
+          value={formik.values.isPrivate}
         />
       </ChecboxLabel>
 
