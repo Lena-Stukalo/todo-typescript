@@ -11,7 +11,9 @@ export const QUERY_KEYS = {
   EXAMPLE: 'EXAMPLE',
   TOKEN: 'TOKEN',
   STATISTIC: 'statistic',
-  TRENDING: 'trending'
+  TRENDING: 'trending',
+  TODO: 'todo',
+  TODOS: 'todos'
 };
 
 // Backend Routes
@@ -21,7 +23,9 @@ export const BACKEND_KEYS = {
   ARTICLES: 'articles',
   STATISTIC: 'statistic',
   TRENDING: 'trending',
-  FEATURED_ARTICLES: 'featured_articles'
+  FEATURED_ARTICLES: 'featured_articles',
+  TODOS: 'todos',
+  SERVER_URL: 'http://localhost:4200'
 };
 
 export const ROUTER_KEYS = {

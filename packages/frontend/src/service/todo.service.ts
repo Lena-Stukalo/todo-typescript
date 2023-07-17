@@ -2,41 +2,43 @@
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 import { ITodoNotId } from '../modules/common/types/todo.types';
 import { HttpSerivce } from './http.service';
+import { APP_KEYS } from '../modules/common/consts';
 
 export class TodoService extends HttpSerivce {
-    constructor(baseUrl: string, apiVersion: string) {
-        super(baseUrl, apiVersion);
+    constructor() {
+        super();
     }
 
     async getAllTodos() {
         return this.get({
-            url: 'todos'
+            url: APP_KEYS.BACKEND_KEYS.TODOS
         });
     }
 
     geTodo(id: string) {
         return this.get({
-            url: `todos/${id}`
+            url: `${APP_KEYS.BACKEND_KEYS.TODOS}/${id}`
         });
     }
 
     updateTodo(id: string, todo: ITodoNotId) {
         return this.put({
-            url: `todos/${id}`,
+            url: `${APP_KEYS.BACKEND_KEYS.TODOS}/${id}`,
             data: todo
         });
     }
 
     createTodo(todo: ITodoNotId) {
         return this.post({
-            url: 'todos',
+            url: APP_KEYS.BACKEND_KEYS.TODOS,
             data: todo
         });
     }
 
     deleteTodo(id: string) {
         return this.delete({
-            url: `todos/${id}`
+            url: `${APP_KEYS.BACKEND_KEYS.TODOS}/${id}`
         });
     }
 }
+export const todoService = new TodoService();

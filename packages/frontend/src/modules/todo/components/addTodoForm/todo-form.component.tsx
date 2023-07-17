@@ -33,14 +33,15 @@ export const TodoFormComponent: React.FC<IProps> = ({
       onSubmit(values);
     }
   };
+  const formValues = {
+    title: '',
+    description: '',
+    isDone: false,
+    isPrivate: false
+  };
 
   const formik = useFormik({
-    initialValues: {
-      title: '',
-      description: '',
-      isDone: false,
-      isPrivate: false
-    },
+    initialValues: formValues,
     onSubmit: handeleSubmit,
     validationSchema: TodoSchema
   });

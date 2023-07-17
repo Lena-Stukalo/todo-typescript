@@ -1,15 +1,35 @@
+/* eslint-disable react/jsx-closing-tag-location */
 /* eslint-disable max-len */
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 import { Overlay, Content, Button, SVG } from './modal.styled';
+
+const modalRoot = document.querySelector('#root-modal');
 
 interface IProps {
   children: React.ReactNode;
   onClick: Function;
 }
-export const ModalComponent: React.FC<IProps> = ({ children, onClick }) => (
-  <Overlay>
+export const ModalComponent: React.FC<IProps> = ({ children, onClick }) => {
+  const handleKeyDown = (e) => {
+    if (e.code === 'Escape') {
+      onClick();
+    }
+  };
+
+  const handleBackdropClick = (e) => {
+    if (e.currentTarget === e.target) {
+      onClick();
+    }
+  };
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  });
+
+  return createPortal(<Overlay onClick={handleBackdropClick}>
     <Content>
       <Button onClick={onClick}>
         <SVG
@@ -25,5 +45,6 @@ export const ModalComponent: React.FC<IProps> = ({ children, onClick }) => (
       </Button>
       {children}
     </Content>
-  </Overlay>
+  </Overlay>, modalRoot!
 );
+};

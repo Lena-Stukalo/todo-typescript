@@ -30,20 +30,20 @@ export const CheckBoxLabel = styled('label')`
   font-size: ${theme.FONTS.SIZES.m};
 `;
 export const Button = styled('button')`
-  max-width: 100px;
+  width: 100px;
   height: 30px;
   left: 20px;
-  color: #ffffff;
-  border: 1px solid #28abe8;
+  color: ${theme.COLORS.white};
+  border: 1px solid ${theme.COLORS.blue};
   border-radius: 5px;
-  background-color: #28abe8;
+  background-color: ${theme.COLORS.blue};
   font-size: ${theme.FONTS.SIZES.m};
   text-align: center;
 
   &:hover {
-    background: #ffffff;
-    border: 1px solid #28abe8;
-    color: #28abe8;
+    background: ${theme.COLORS.white};
+    border: 1px solid ${theme.COLORS.blue};
+    color: ${theme.COLORS.blue};
     transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 `;

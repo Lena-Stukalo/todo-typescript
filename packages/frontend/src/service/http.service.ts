@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
 import { ITodoNotId } from '../modules/common/types/todo.types';
+import { APP_KEYS } from '../modules/common/consts';
 
 interface IConfig {
     url: string;
@@ -14,10 +15,10 @@ export class HttpSerivce {
 
     apiVersion?: string;
 
-    constructor(baseUrl: string, apiVersion = 'api') {
-        this.baseUrl = baseUrl;
+    constructor() {
+        this.baseUrl = APP_KEYS.BACKEND_KEYS.SERVER_URL;
         this.fetchingService = axios;
-        this.apiVersion = apiVersion;
+        this.apiVersion = 'api';
     }
 
     private getFullApiUrl(url: string) {

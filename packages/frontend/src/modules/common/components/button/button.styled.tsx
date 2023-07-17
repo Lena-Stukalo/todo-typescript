@@ -6,18 +6,18 @@ export const ButtonStyled = styled('button')`
   margin: 20px auto 0 auto;
   width: 100px;
   height: 30px;
-  color: #ffffff;
-  border: 1px solid #28abe8;
+  color: ${theme.COLORS.white};
+  border: 1px solid ${theme.COLORS.blue};
   border-radius: 5px;
-  background-color: #28abe8;
+  background-color: ${theme.COLORS.blue};
   font-size: ${theme.FONTS.SIZES.m};
   text-align: center;
   display: block;
 
   &:hover {
-    background: #ffffff;
-    border: 1px solid #28abe8;
-    color: #28abe8;
+    background: ${theme.COLORS.white};
+    border: 1px solid ${theme.COLORS.blue};
+    color: ${theme.COLORS.blue};
     transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 `;

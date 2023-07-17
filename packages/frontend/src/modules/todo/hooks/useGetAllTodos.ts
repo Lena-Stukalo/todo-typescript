@@ -1,15 +1,15 @@
 /* eslint-disable prettier/prettier */
 import { useQuery } from 'react-query';
-import { TodoService } from '../../../service/todo.service';
+import { todoService } from '../../../service/todo.service';
+import { APP_KEYS } from '../../common/consts';
 
 export const useGetAllTodos = () => {
-  const todoService = new TodoService('http://localhost:4200', 'api');
   const get = async () => {
     const { data } = await todoService.getAllTodos();
     return data;
   };
   const { data, isError, isLoading } = useQuery({
-    queryKey: ['todos'],
+    queryKey: [APP_KEYS.QUERY_KEYS.TODOS],
     queryFn: get,
   });
   return { data, isError, isLoading };

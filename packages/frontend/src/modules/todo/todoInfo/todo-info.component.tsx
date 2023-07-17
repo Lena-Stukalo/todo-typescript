@@ -14,6 +14,7 @@ import {
     Wraper,
 } from './todo-info.styled';
 import { CustomChecbox } from '../../common/components/checkbox/checkbox.component';
+import { APP_KEYS } from '../../common/consts';
 
 interface IProps {
   card: ITodo;
@@ -28,13 +29,13 @@ export const TodoInfoComponent: React.FC<IProps> = ({
   const navigate = useNavigate();
   const client = useQueryClient();
   const handleDelete = () => {
-    client.invalidateQueries({ queryKey: ['todo'] });
-    navigate('/todos');
+    navigate(APP_KEYS.ROUTER_KEYS.TODOS);
+    client.removeQueries({ queryKey: [APP_KEYS.QUERY_KEYS.TODO] });
     onDelete(card.id);
   };
   const handleGoBack = () => {
-    client.invalidateQueries({ queryKey: ['todo'] });
-    navigate('/todos');
+    navigate(APP_KEYS.ROUTER_KEYS.TODOS);
+    client.removeQueries({ queryKey: [APP_KEYS.QUERY_KEYS.TODO] });
   };
 
   return (

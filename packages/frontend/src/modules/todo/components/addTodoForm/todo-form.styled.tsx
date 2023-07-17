@@ -10,13 +10,13 @@ export const ModalInput = styled.input`
   display: block;
   width: 100%;
   height: 30px;
-  border: 1px solid rgba(33, 33, 33, 0.2);
+  border: 1px solid ${theme.COLORS.gray};
   box-sizing: border-box;
   border-radius: 4px;
   margin-bottom: 10px;
   padding: 12px 20px;
   transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  color: #000;
+  color: ${theme.COLORS.black};
   font-size: ${theme.FONTS.SIZES.s};
 `;
 
@@ -25,7 +25,7 @@ export const Label = styled.label`
   font-size: 12px;
   line-height: 1.17;
   letter-spacing: 0.01em;
-  color: #757575;
+  color: ${theme.COLORS.darckGray};
   margin-bottom: 4px;
 `;
 export const ChecboxLabel = styled.label`
@@ -34,7 +34,7 @@ export const ChecboxLabel = styled.label`
   font-size: 12px;
   line-height: 1.17;
   letter-spacing: 0.01em;
-  color: #757575;
+  color: ${theme.COLORS.darckGray};
   margin-bottom: 20px;
 `;
 
@@ -43,11 +43,11 @@ export const ModalTextarea = styled.input`
   resize: none;
   width: 100%;
   height: 60px;
-  border: 1px solid rgba(33, 33, 33, 0.2);
+  border: 1px solid ${theme.COLORS.gray};
   box-sizing: border-box;
   border-radius: 4px;
   padding: 12px 16px;
-  color: #000;
+  color: ${theme.COLORS.black};
   margin-bottom: 20px;
   transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
   font-size: ${theme.FONTS.SIZES.s};
@@ -56,7 +56,7 @@ export const ModalTextarea = styled.input`
     font-size: ${theme.FONTS.SIZES.s};
     line-height: 1.17;
     letter-spacing: 0.01em;
-    color: rgba(117, 117, 117, 0.5);
+    color: ${theme.COLORS.darckGray};
   }
 `;
 
@@ -69,18 +69,18 @@ export const Button = styled.button`
   width: 100px;
   height: 30px;
   left: 20px;
-  color: #ffffff;
-  border: 1px solid #28abe8;
+  color: ${theme.COLORS.white};
+  border: 1px solid ${theme.COLORS.blue};
   border-radius: 5px;
-  background-color: #28abe8;
+  background-color: ${theme.COLORS.blue};
   font-size: ${theme.FONTS.SIZES.s};
   text-align: center;
   margin: 0 auto;
 
   &:hover {
-    background: #ffffff;
-    border: 1px solid #28abe8;
-    color: #28abe8;
+    background: ${theme.COLORS.white};
+    border: 1px solid ${theme.COLORS.blue};
+    color: ${theme.COLORS.blue};
     transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 `;

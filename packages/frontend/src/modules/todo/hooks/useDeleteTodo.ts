@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { useMutation, useQueryClient } from 'react-query';
-import { TodoService } from '../../../service/todo.service';
+import { todoService } from '../../../service/todo.service';
+import { APP_KEYS } from '../../common/consts';
 
 export const useDeleteTodo = () => {
-  const todoService = new TodoService('http://localhost:4200', 'api');
   const deletion = async (id: string) => {
     const { data } = await todoService.deleteTodo(id);
     return data;
@@ -14,7 +14,7 @@ export const useDeleteTodo = () => {
       await deletion(id);
     },
     {
-      onSuccess: () => queryClient.invalidateQueries(['todos'])
+      onSuccess: () => queryClient.removeQueries([APP_KEYS.QUERY_KEYS.TODOS])
     }
   );
   return mutation;
