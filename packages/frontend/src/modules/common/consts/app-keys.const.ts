@@ -24,8 +24,7 @@ export const BACKEND_KEYS = {
   STATISTIC: 'statistic',
   TRENDING: 'trending',
   FEATURED_ARTICLES: 'featured_articles',
-  TODOS: 'todos',
-  SERVER_URL: 'http://localhost:4200'
+  TODOS: 'todos'
 };
 
 export const ROUTER_KEYS = {

@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
 import { ITodoNotId } from '../modules/common/types/todo.types';
-import { APP_KEYS } from '../modules/common/consts';
 
 interface IConfig {
     url: string;
@@ -16,7 +15,7 @@ export class HttpSerivce {
     apiVersion?: string;
 
     constructor() {
-        this.baseUrl = APP_KEYS.BACKEND_KEYS.SERVER_URL;
+        this.baseUrl = process.env.REACT_APP_SERVER_URL!;
         this.fetchingService = axios;
         this.apiVersion = 'api';
     }
