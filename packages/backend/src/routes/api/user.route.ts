@@ -2,7 +2,6 @@ import { Router } from 'express';
 import { isVerifyExist } from '../../middlewares/IsVerifyExist.middleware';
 import { authenticate } from '../../middlewares/authtanticate.middleware';
 import userController from '../../controllers/user.controller';
-import { isExist } from '../../middlewares/isExist.middleware';
 import { tryCatch } from '../../middlewares/tryCatch.middleware';
 import { isNotExist } from '../../middlewares/isNotExist.middleware';
 import { User } from '../../entities/user.entity';
