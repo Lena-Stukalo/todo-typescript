@@ -1,22 +1,25 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Todo extends BaseEntity {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  title: string;
+  name: string;
 
   @Column()
-  description: string;
+  email: string;
 
   @Column()
-  isDone: boolean;
+  password: string;
 
   @Column()
-  isPrivate: boolean;
+  token: string;
 
   @Column()
-  ownerId: string;
+  verificationToken: string;
+
+  @Column()
+  verify: boolean;
 }

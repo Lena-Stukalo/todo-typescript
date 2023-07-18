@@ -104,7 +104,7 @@ rules:
   # We don't need consistent returns
   'consistent-return': 'off'
   'prettier/prettier': ['error', {endOfLine: 'auto'}]
-  linebreak-style: ["error", "windows"]
+  'linebreak-style': ["error", "windows"]
 
   # ⭐ JSX-A11Y rules
   'jsx-a11y/no-noninteractive-element-interactions': 'off'

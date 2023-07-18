@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { DataSource } from 'typeorm';
 import { Todo } from '../entities/todo.entity';
+import { User } from '../entities/user.entity';
 
 function getSSLConfig(env: string) {
   const configs: { [key: string]: boolean | { [key: string]: boolean } } = {
@@ -22,7 +23,7 @@ const connectDB = async () => {
       logging: ['query', 'error'],
       type: 'postgres',
       // entities: ['dist/**/*.entity.{ts,js}'],
-      entities: [Todo],
+      entities: [Todo, User],
       migrations: ['dist/migrations/**/*.{ts,js}'],
       subscribers: ['src/subscriber/**/*.ts'],
       database: process.env.POSTGRES_DB,
