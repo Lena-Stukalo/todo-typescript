@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -15,9 +16,9 @@ const queryClient = new QueryClient({
       refetchOnMount: false,
       refetchOnWindowFocus: false,
       refetchOnReconnect: true,
-      cacheTime: Infinity
-    }
-  }
+      cacheTime: Infinity,
+    },
+  },
 });
 
 const AppContainer = () => (

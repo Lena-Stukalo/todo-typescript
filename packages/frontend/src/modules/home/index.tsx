@@ -1,5 +1,10 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 
-const HomePageContainer = () => <div>React is ready HOME</div>;
+const HomePageContainer = () => (
+  <div>
+    Home
+  </div>
+);
 
 export default HomePageContainer;
