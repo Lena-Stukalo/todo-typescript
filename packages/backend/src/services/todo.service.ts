@@ -1,9 +1,10 @@
+import { IUser } from '../types/user.type';
 import { Todo } from '../entities/todo.entity';
-import { ITodo } from '../types/todos.type';
+import { ITodo, ITodoUser } from '../types/todos.type';
 
 export default class TodoService {
-  async findAll() {
-    const result = await Todo.find();
+  async findAll(user: IUser) {
+    const result = await Todo.findBy({ ownerId: user.id });
     return result;
   }
 
@@ -12,8 +13,8 @@ export default class TodoService {
     return result;
   }
 
-  async create(data: ITodo) {
-    const result = await Todo.create({ ...data });
+  async create(data: ITodoUser) {
+    const result = await Todo.create({ ...data, ownerId: data.user.id });
     result.save();
     return result;
   }
