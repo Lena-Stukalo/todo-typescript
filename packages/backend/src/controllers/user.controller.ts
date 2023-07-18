@@ -1,5 +1,4 @@
 import { Response, Request } from 'express';
-import { RequestWithUser } from '../types/request.type';
 import UserService from '../services/user.service';
 
 export class UserController {
@@ -16,33 +15,33 @@ export class UserController {
     res.send(result);
   }
 
-  async current(req: RequestWithUser, res: Response) {
-    const result = await this.userService.current(req.user);
+  async current(req: Request, res: Response) {
+    const result = await this.userService.current(req.body.user);
     res.send(result);
   }
 
-  async logout(req: RequestWithUser, res: Response) {
-    const result = await this.userService.logout(req.user);
+  async logout(req: Request, res: Response) {
+    const result = await this.userService.logout(req.body.user.id);
     res.send(result);
   }
 
-  async verify(req: RequestWithUser, res: Response) {
-    const result = await this.userService.verify(req.user.id);
+  async verify(req: Request, res: Response) {
+    const result = await this.userService.verify(req.body.user.id);
     res.send(result);
   }
 
-  async changePassword(req: RequestWithUser, res: Response) {
-    const result = await this.userService.cangePassword(req.user.id, req.body.password);
+  async changePassword(req: Request, res: Response) {
+    const result = await this.userService.cangePassword(req.body.user.id, req.body.password);
     res.send(result);
   }
 
-  async sendResetPasword(req: RequestWithUser, res: Response) {
+  async sendResetPasword(req: Request, res: Response) {
     const result = await this.userService.sendResetPassword(req.body);
     res.send(result);
   }
 
-  async resetPassword(req: RequestWithUser, res: Response) {
-    const result = await this.userService.resetPassword(req.body);
+  async resetPassword(req: Request, res: Response) {
+    const result = await this.userService.resetPassword(req.body.user.id);
     res.send(result);
   }
 }

@@ -16,4 +16,7 @@ export class Todo extends BaseEntity {
 
   @Column()
   isPrivate: boolean;
+
+  @Column()
+  ownerId: string;
 }

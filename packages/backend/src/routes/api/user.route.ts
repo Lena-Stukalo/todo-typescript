@@ -1,4 +1,11 @@
 import { Router } from 'express';
+import { validateBody } from '../../middlewares/validateBody.middleware';
+import {
+  userSchemaReg,
+  userSchemaLog,
+  userSchemaReset,
+  userSchemaChange
+} from '../../schemas/user.scema';
 import { isVerifyExist } from '../../middlewares/IsVerifyExist.middleware';
 import { authenticate } from '../../middlewares/authtanticate.middleware';
 import userController from '../../controllers/user.controller';
@@ -6,16 +13,21 @@ import { tryCatch } from '../../middlewares/tryCatch.middleware';
 import { isNotExist } from '../../middlewares/isNotExist.middleware';
 import { User } from '../../entities/user.entity';
 import { isVerify } from '../../middlewares/isVerify.middleware';
-import { isUserExist } from '../../middlewares/isUserExist.middleware';
 
 const userRouter: Router = Router();
 
 userRouter.post(
   '/register',
+  validateBody(userSchemaReg),
   isNotExist(User),
   tryCatch(userController.register.bind(userController))
 );
-userRouter.post('/login', isVerify(User), tryCatch(userController.login.bind(userController)));
+userRouter.post(
+  '/login',
+  validateBody(userSchemaLog),
+  isVerify(User),
+  tryCatch(userController.login.bind(userController))
+);
 userRouter.get(
   '/current',
   authenticate(User),
@@ -29,12 +41,14 @@ userRouter.get(
 );
 userRouter.patch(
   '/changepassword',
+  validateBody(userSchemaChange),
   authenticate(User),
   tryCatch(userController.changePassword.bind(userController))
 );
 userRouter.post(
   '/resetpassword',
-  isUserExist(User),
+  validateBody(userSchemaReset),
+  isVerify(User),
   tryCatch(userController.sendResetPasword.bind(userController))
 );
 userRouter.get(

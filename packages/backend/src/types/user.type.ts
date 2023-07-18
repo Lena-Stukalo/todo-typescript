@@ -9,9 +9,6 @@ export interface IUserLog {
   email: string;
   password: string;
 }
-export interface IUserReset {
-  email: string;
-}
 export interface IUser {
   id: string;
   name: string;
@@ -20,4 +17,8 @@ export interface IUser {
   token: string;
   verificationToken: string;
   verify: boolean;
+}
+export interface IUserReset {
+  email: string;
+  user: IUser;
 }

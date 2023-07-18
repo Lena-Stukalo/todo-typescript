@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import bodyParser from 'body-parser';
 import express from 'express';
 import 'dotenv/config';

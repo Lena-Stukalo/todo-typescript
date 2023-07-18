@@ -5,8 +5,8 @@ export class TodoController {
   // eslint-disable-next-line prettier/prettier
   constructor(private todoService: TodoService) { }
 
-  async getAllTodo(_: Request, res: Response) {
-    const todos = await this.todoService.findAll();
+  async getAllTodo(req: Request, res: Response) {
+    const todos = await this.todoService.findAll(req.body.user);
     res.send(todos);
   }
 

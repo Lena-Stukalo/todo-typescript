@@ -1,20 +1,20 @@
 /* eslint-disable prettier/prettier */
-import { NextFunction, Response } from 'express';
+import { NextFunction, Response, Request } from 'express';
 import { BaseEntity, FindOptionsWhere } from 'typeorm';
-import { RequestWithUser } from '../types/request.type';
 import { RequestError } from '../helpers/RequestError';
 import { ErrorWithStatus } from '../types/error.type';
+import { IUser } from '../types/user.type';
 
 export const isVerifyExist =
   <T extends BaseEntity>(Entitys: typeof BaseEntity) =>
-    async (req: Partial<RequestWithUser>, res: Response, next: NextFunction) => {
+    async (req: Request, res: Response, next: NextFunction) => {
       try {
-        const { verificationToken } = req.params;
-        const result = await Entitys.findOneBy({ verificationToken } as unknown as FindOptionsWhere<T>);
+        const { Token } = req.params;
+        const result = await Entitys.findOneBy({ verificationToken: Token } as unknown as FindOptionsWhere<T>);
         if (!result) {
           throw new Error('Not found');
         }
-        req.user = result;
+         req.body.user = result as unknown as IUser;
         next();
       } catch (error) {
         let e = error as ErrorWithStatus;

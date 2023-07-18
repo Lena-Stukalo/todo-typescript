@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import { User } from '../entities/user.entity';
 import { IUser, IUserLog, IUserReg, IUserReset } from '../types/user.type';
 import { createVerifyEmail } from '../helpers/createVerifyMail';
-import { sendMail } from '../helpers/sendEmaiil';
+import { sendMailTo } from '../helpers/sendEmaiil';
 import { RequestError } from '../helpers/RequestError';
 
 export default class UserService {
@@ -16,11 +16,13 @@ export default class UserService {
     const result = await User.create({
       ...data,
       password: hashPassword,
-      verificationToken
+      verificationToken,
+      verify: false,
+      token: ''
     });
     const mail = createVerifyEmail(email, verificationToken, 'verify');
 
-    await sendMail(mail);
+    await sendMailTo(mail);
 
     result.save();
     return {
@@ -39,7 +41,7 @@ export default class UserService {
     const payload = {
       id: user!.id
     };
-    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '24h' });
+    const token = jwt.sign(payload, process.env.SECRET_KEY!, { expiresIn: '24h' });
     await User.update({ id: user!.id }, { token });
     return {
       token
@@ -54,8 +56,7 @@ export default class UserService {
     };
   }
 
-  async logout(user: IUser) {
-    const { id } = user;
+  async logout(id: string) {
     await User.update({ id }, { token: '' });
     return {
       message: 'Logout success'
@@ -82,14 +83,14 @@ export default class UserService {
   }
 
   async sendResetPassword(data: IUserReset) {
-    const { email } = data;
+    const { email, user } = data;
     const resetToken = uuid();
     const mail = createVerifyEmail(email, resetToken, 'resetpassword');
-    await User.update(email, {
+    await User.update(user.id, {
       verificationToken: resetToken
     });
 
-    const result = await sendMail(mail);
+    const result = await sendMailTo(mail);
 
     return result;
   }
@@ -101,7 +102,8 @@ export default class UserService {
       password: hashPassword
     });
     return {
-      message: 'Reset password success'
+      message:
+        "Reset password success. Your password changed to 'aaaa' Change it on a first opportunity"
     };
   }
 }

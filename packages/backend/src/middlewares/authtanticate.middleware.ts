@@ -1,14 +1,16 @@
 import jwt from 'jsonwebtoken';
-import { NextFunction, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { BaseEntity, FindOptionsWhere } from 'typeorm';
 import { IUser } from '../types/user.type';
 import { RequestError } from '../helpers/RequestError';
 import { ErrorWithStatus } from '../types/error.type';
-import { RequestWithUser } from '../types/request.type';
 
+interface JwtPayload {
+  id: string;
+}
 export const authenticate =
   <T extends BaseEntity>(Entitys: typeof BaseEntity) =>
-  async (req: Partial<RequestWithUser>, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { authorization } = req.headers;
       if (!authorization) {
@@ -18,14 +20,14 @@ export const authenticate =
       if (bearer !== 'Bearer') {
         throw new Error('Unauthorized');
       }
-      const { id } = jwt.verify(token, process.env.SECRET_KEY);
+      const { id } = jwt.verify(token, process.env.SECRET_KEY!) as JwtPayload;
       const user = (await Entitys.findOneBy({
         id
       } as unknown as FindOptionsWhere<T>)) as unknown as IUser;
       if (!user || user.token !== token) {
         throw new Error('Unauthorized');
       }
-      req.user = user;
+      req.body.user = user;
       next();
     } catch (error) {
       let e = error as ErrorWithStatus;

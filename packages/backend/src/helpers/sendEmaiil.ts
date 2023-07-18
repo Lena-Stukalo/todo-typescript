@@ -1,13 +1,27 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import * as sgMail from '@sendgrid/mail';
+import nodemailer, { TransportOptions } from 'nodemailer';
 import { IMail } from '../types/mail.type';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+interface ITransport extends TransportOptions {
+  host: string;
+  port: number;
+  auth: {
+    user: string;
+    path: string;
+  };
+}
+const transporterOptions = {
+  host: 'smtp-relay.brevo.com',
+  port: 587,
+  auth: {
+    user: 'lena.s26367@gmail.com',
+    path: process.env.SENDMAIL_API_KEY!
+  }
+} as unknown as ITransport;
 
-export const sendMail = async (data: IMail) => {
+export const sendMailTo = async (data: IMail) => {
+  const transporter = nodemailer.createTransport(transporterOptions);
+
   const mail = { ...data, from: 'lena.s26367@gmail.com' };
-  await sgMail
-    .send(mail)
-    .then(() => 'Success')
-    .catch(() => 'Fail');
+  await transporter.sendMail(mail, () => 'Fail');
 };
