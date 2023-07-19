@@ -3,19 +3,23 @@ import nodemailer, { TransportOptions } from 'nodemailer';
 import { IMail } from '../types/mail.type';
 
 interface ITransport extends TransportOptions {
-  host: string;
-  port: number;
+  service: string;
   auth: {
     user: string;
-    path: string;
+    pass: string;
+  };
+  tls: {
+    rejectUnauthorized: boolean;
   };
 }
 const transporterOptions = {
-  host: 'smtp-relay.brevo.com',
-  port: 587,
+  service: 'gmail',
   auth: {
     user: 'lena.s26367@gmail.com',
-    path: process.env.SENDMAIL_API_KEY!
+    pass: 'dffwnpqgwzhdvfks'
+  },
+  tls: {
+    rejectUnauthorized: false
   }
 } as unknown as ITransport;
 
@@ -23,5 +27,11 @@ export const sendMailTo = async (data: IMail) => {
   const transporter = nodemailer.createTransport(transporterOptions);
 
   const mail = { ...data, from: 'lena.s26367@gmail.com' };
-  await transporter.sendMail(mail, () => 'Fail');
+  await transporter.sendMail(mail, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(info);
+    }
+  });
 };
