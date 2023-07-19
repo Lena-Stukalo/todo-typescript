@@ -8,6 +8,7 @@ export interface IUserReg {
 export interface IUserLog {
   email: string;
   password: string;
+  id: string;
 }
 export interface IUser {
   id: string;

@@ -74,8 +74,9 @@ export default class UserService {
   }
 
   async cangePassword(id: string, password: string) {
+    const hashPassword = await bcrypt.hash(password, 10);
     await User.update(id, {
-      password
+      password: hashPassword
     });
     return {
       message: 'Pasword change success'
