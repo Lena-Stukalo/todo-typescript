@@ -1,17 +1,39 @@
+/* eslint-disable no-continue */
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 import { ITodoNotId } from '../modules/common/types/todo.types';
 import { HttpSerivce } from './http.service';
 import { APP_KEYS } from '../modules/common/consts';
+import { TParam } from '../modules/common/types/params.type';
 
 export class TodoService extends HttpSerivce {
     constructor() {
         super();
     }
 
-    async getAllTodos() {
+    createUrlWithParams(params?:TParam) {
+        if (!params) {
+            return '';
+        }
+        let paramsUrl = '';
+        // eslint-disable-next-line guard-for-in, prefer-const
+        for (let key in params) {
+            if (params[key] === '') {
+                continue;
+            }
+            if (paramsUrl.length === 0) {
+                paramsUrl = `?${paramsUrl}${key}=${params[key]}`;
+            } else {
+                paramsUrl = `${paramsUrl}&${key}=${params[key]}`;
+            }
+        }
+        return paramsUrl;
+    }
+
+    async getAllTodos(params?:TParam) {
+       const paramsUrl = this.createUrlWithParams(params);
         return this.get({
-            url: APP_KEYS.BACKEND_KEYS.TODOS
+            url: `${APP_KEYS.BACKEND_KEYS.TODOS}${paramsUrl}`
         });
     }
 

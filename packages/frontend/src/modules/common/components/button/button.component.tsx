@@ -4,8 +4,9 @@ import { ButtonStyled } from './button.styled';
 
 interface IProps {
   text: string;
-  onClick: Function;
+  onClick?: Function;
+  type:string;
 }
-export const Button: React.FC<IProps> = ({ text, onClick }) => (
-  <ButtonStyled onClick={onClick}>{text}</ButtonStyled>
+export const Button: React.FC<IProps> = ({ text, onClick, type }) => (
+  <ButtonStyled onClick={onClick} type={type}>{text}</ButtonStyled>
 );

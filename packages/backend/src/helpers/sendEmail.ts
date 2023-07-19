@@ -16,7 +16,7 @@ const transporterOptions = {
   service: 'gmail',
   auth: {
     user: 'lena.s26367@gmail.com',
-    pass: 'dffwnpqgwzhdvfks'
+    pass: process.env.SENDMAIL_API_KEY
   },
   tls: {
     rejectUnauthorized: false

@@ -3,6 +3,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable prettier/prettier */
 import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import { Link, LinkWraper, TodosContainer } from './index.styled';
 import { useGetAllTodos } from '../todo/hooks/useGetAllTodos';
 import { Notification } from '../common/components/notification/notification.component';
@@ -15,14 +16,18 @@ import { ITodoNotId } from '../common/types/todo.types';
 import { useDeleteTodo } from '../todo/hooks/useDeleteTodo';
 import Loader from '../common/components/loader/loader.component';
 import { TodoContent } from '../todo/components/todoContent/todo-content.component';
+import { FilterBarComponent } from '../todo/components/filterBar/filter-bar.component';
 
 const TodosPageContainer = () => {
-    const { data, isLoading, isError } = useGetAllTodos();
+  const [filters, setFilters] = useState({
+    isDone: '',
+    isPrivate: ''
+  });
+    const { data, isLoading, isError } = useGetAllTodos(filters);
     const { isOpen, toggle } = useToggle();
     const mutation = useCreateTodo();
     const deletion = useDeleteTodo();
     const navigate = useNavigate();
-
     const toggleModal = () => {
         toggle();
     };
@@ -45,9 +50,10 @@ const TodosPageContainer = () => {
     if (data) {
         return (
           <TodosContainer>
+            <FilterBarComponent onSubmit={setFilters} />
             {!data.length ? <Notification text="You dont have any todo" /> : <TodoContent data={data} onDelete={onDelete} onView={handleView} />}
             <LinkWraper>
-              <Button text="Add todo" onClick={toggleModal} />
+              <Button text="Add todo" onClick={toggleModal} type="button" />
               <Link to="/profile">Profile</Link>
             </LinkWraper>
             {isOpen && <ModalComponent onClick={toggleModal}>

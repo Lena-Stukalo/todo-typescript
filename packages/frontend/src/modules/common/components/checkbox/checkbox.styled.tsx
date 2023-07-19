@@ -18,6 +18,17 @@ const HiddenCheckbox = styled.input`
 
 export const Checkmark = styled.span`
   position: absolute;
+  top: 10px;
+  left: 40px;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 40px;
+  background-color: ${theme.COLORS.black}; /* Початковий колір фону */
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+`;
+export const CheckmarkCard = styled.span`
+  position: absolute;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
@@ -50,6 +61,15 @@ export const CheckboxInput = styled(HiddenCheckbox)`
   }
 
   &:checked ~ ${Checkmark} ${CheckmarkCircle} {
+    transform: translateX(125%); /* Рухаємо коло в протилежний бік */
+  }
+`;
+export const CheckboxInputCard = styled(HiddenCheckbox)`
+  &:checked ~ ${CheckmarkCard} {
+    background-color:${theme.COLORS.green}; /* Зелений колір фону */
+  }
+
+  &:checked ~ ${CheckmarkCard} ${CheckmarkCircle} {
     transform: translateX(125%); /* Рухаємо коло в протилежний бік */
   }
 `;
