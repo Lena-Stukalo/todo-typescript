@@ -1,10 +1,9 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
-import { ITodoNotId } from '../modules/common/types/todo.types';
 
 interface IConfig {
     url: string;
-    data?: ITodoNotId;
+    data?: object;
 }
 
 export class HttpSerivce {
@@ -24,12 +23,20 @@ export class HttpSerivce {
         return `${this.baseUrl}/${this.apiVersion}/${url}`;
     }
 
+    tokenSet(token:string) {
+        this.fetchingService.defaults.headers.common.Authorization = `Bearer ${token}`;
+      }
+
+      tokenUnSet() {
+        this.fetchingService.defaults.headers.common.Authorization = '';
+      }
+
     get(config: IConfig) {
         return this.fetchingService.get(this.getFullApiUrl(config.url));
     }
 
-    put(config: IConfig) {
-        return this.fetchingService.put(this.getFullApiUrl(config.url), config.data);
+    patch(config: IConfig) {
+        return this.fetchingService.patch(this.getFullApiUrl(config.url), config.data);
     }
 
     delete(config: IConfig) {

@@ -13,6 +13,7 @@ import { tryCatch } from '../../middlewares/tryCatch.middleware';
 import { isNotExist } from '../../middlewares/isNotExist.middleware';
 import { User } from '../../entities/user.entity';
 import { isVerify } from '../../middlewares/isVerify.middleware';
+import { isPassWordValid } from '../../middlewares/isPasswordValid.middleware';
 
 const userRouter: Router = Router();
 
@@ -26,6 +27,7 @@ userRouter.post(
   '/login',
   validateBody(userSchemaLog),
   isVerify(User),
+  isPassWordValid(User),
   tryCatch(userController.login.bind(userController))
 );
 userRouter.get(
@@ -45,7 +47,7 @@ userRouter.patch(
   authenticate(User),
   tryCatch(userController.changePassword.bind(userController))
 );
-userRouter.post(
+userRouter.patch(
   '/resetpassword',
   validateBody(userSchemaReset),
   isVerify(User),

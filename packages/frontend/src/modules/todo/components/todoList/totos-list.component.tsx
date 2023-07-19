@@ -3,6 +3,7 @@ import React from 'react';
 import { ITodo } from '../../../common/types/todo.types';
 import { List, Wraper, StyledNavLink } from './todo-list.styled';
 import { TodoCard } from '../todoCard/todo-card.component';
+import { Button } from '../../../common/components/button/button.component';
 
 interface IProps {
     cards: ITodo[];
@@ -14,8 +15,9 @@ export const TodoList: React.FC<IProps> = ({ cards, onDelete }) => (
     {cards.map((todo) => (
       <Wraper key={todo.id}>
         <StyledNavLink to={`/todo/${todo.id}`}>
-          <TodoCard card={todo} onDelete={onDelete} />
+          <TodoCard card={todo} />
         </StyledNavLink>
+        <Button onClick={() => { onDelete(todo.id); }} text="Delete" />
       </Wraper>
         ))}
   </List>

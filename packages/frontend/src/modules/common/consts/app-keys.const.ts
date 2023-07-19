@@ -13,7 +13,9 @@ export const QUERY_KEYS = {
   STATISTIC: 'statistic',
   TRENDING: 'trending',
   TODO: 'todo',
-  TODOS: 'todos'
+  TODOS: 'todos',
+  USER: 'user',
+  LOG: 'isLogedIn'
 };
 
 // Backend Routes
@@ -24,7 +26,8 @@ export const BACKEND_KEYS = {
   STATISTIC: 'statistic',
   TRENDING: 'trending',
   FEATURED_ARTICLES: 'featured_articles',
-  TODOS: 'todos'
+  TODOS: 'todos',
+  USER: 'user'
 };
 
 export const ROUTER_KEYS = {
@@ -32,5 +35,9 @@ export const ROUTER_KEYS = {
   HOME: 'home',
   AUTHORIZED: 'authorized',
   TODOS: '/todos',
-  TODOID: '/todo/:id'
+  TODOID: '/todo/:id',
+  LOGIN: '/login',
+  REGISTER: '/register',
+  PROFILE: '/profile',
+  FORGOT: '/forgot'
 };
