@@ -4,7 +4,7 @@ export const createVerifyEmail = (email: string, Token: string, option: string):
   const mail = {
     to: email,
     subject: `${option}`,
-    html: `<a target="_blank" href="${process.env.BASE_URL}/api/auth/${option}/${Token}">Click me to ${option}</a>`,
+    html: `<a target="_blank" href="${process.env.BASE_URL}/api/user/${option}/${Token}">Click me to ${option}</a>`,
     text: 'Nice to see you'
   };
   return mail;
