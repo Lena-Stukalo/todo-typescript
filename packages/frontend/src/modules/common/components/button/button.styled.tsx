@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import * as theme from '../../../theme';
 
 export const ButtonStyled = styled('button')`
-  margin: 20px auto 0 auto;
   width: 100px;
   height: 30px;
   color: ${theme.COLORS.white};

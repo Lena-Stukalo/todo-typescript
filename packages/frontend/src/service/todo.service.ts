@@ -22,7 +22,7 @@ export class TodoService extends HttpSerivce {
     }
 
     updateTodo(id: string, todo: ITodoNotId) {
-        return this.put({
+        return this.patch({
             url: `${APP_KEYS.BACKEND_KEYS.TODOS}/${id}`,
             data: todo
         });

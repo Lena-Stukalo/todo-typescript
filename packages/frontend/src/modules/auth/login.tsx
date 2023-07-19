@@ -4,15 +4,17 @@
 // eslint-disable-next-line prettier/prettier
 import React from 'react';
 import { useFormik } from 'formik';
-import { AuthContainer, AuthInput, Button, FormStyled, Label, Title } from './index.styled';
-import { UserSchema } from '../todo/schemas/user.schema';
+import { AuthContainer, AuthInput, Button, FormStyled, Label, Link, Title, LinkWraper } from './index.styled';
+import { UserSchemaLog } from '../todo/schemas/user.schema';
+import { useLogUser } from './hooks/useLogUser';
+import { IUserLog } from '../common/types/user.type';
 
-const RegisterPageContainer = () => {
-    const handeleSubmit = () => {
-
+const LoginPageContainer = () => {
+  const mutation = useLogUser();
+    const handeleSubmit = (values:IUserLog) => {
+      mutation.mutate(values);
     };
     const formValues = {
-        name: '',
         email: '',
         password: '',
       };
@@ -20,22 +22,11 @@ const RegisterPageContainer = () => {
       const formik = useFormik({
         initialValues: formValues,
         onSubmit: handeleSubmit,
-        validationSchema: UserSchema
+        validationSchema: UserSchemaLog
       });
 return <AuthContainer>
-  <FormStyled>
-    <Title>Sign Up</Title>
-    <Label htmlFor="name">
-      Name
-      <AuthInput
-        type="text"
-        name="name"
-        id="name"
-        required
-        onChange={formik.handleChange}
-        value={formik.values.name}
-      />
-    </Label>
+  <FormStyled onSubmit={formik.handleSubmit}>
+    <Title>Sign In</Title>
     <Label htmlFor="email">
       E-mail
       <AuthInput
@@ -50,7 +41,7 @@ return <AuthContainer>
     <Label htmlFor="password">
       Password
       <AuthInput
-        type="text"
+        type="password"
         name="password"
         id="password"
         required
@@ -58,8 +49,13 @@ return <AuthContainer>
         value={formik.values.password}
       />
     </Label>
-    <Button>Register</Button>
+    <Button type="submit">Login</Button>
   </FormStyled>
+  <LinkWraper>
+    <Link to="/register">Go to SignUp</Link>
+    <Link to="/todos">Forgot password</Link>
+  </LinkWraper>
+
 </AuthContainer>;
 };
-export default RegisterPageContainer;
+export default LoginPageContainer;
