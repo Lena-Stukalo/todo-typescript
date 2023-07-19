@@ -4,10 +4,11 @@
 // eslint-disable-next-line prettier/prettier
 import React from 'react';
 import { useFormik } from 'formik';
-import { AuthContainer, AuthInput, Button, FormStyled, Label, Link, LinkWraper, Title } from './index.styled';
+import { AuthContainer, Link, LinkWraper } from './index.styled';
 import { UserSchema } from '../todo/schemas/user.schema';
 import { useRegUser } from './hooks/useRegUser';
 import { IUserReg } from '../common/types/user.type';
+import { RegisterForm } from './components/authForms/register-form.component';
 
 const RegisterPageContainer = () => {
   const mutation = useRegUser();
@@ -26,43 +27,7 @@ const RegisterPageContainer = () => {
         validationSchema: UserSchema
       });
 return <AuthContainer>
-  <FormStyled onSubmit={formik.handleSubmit}>
-    <Title>Sign Up</Title>
-    <Label htmlFor="name">
-      Name
-      <AuthInput
-        type="text"
-        name="name"
-        id="name"
-        required
-        onChange={formik.handleChange}
-        value={formik.values.name}
-      />
-    </Label>
-    <Label htmlFor="email">
-      E-mail
-      <AuthInput
-        type="text"
-        name="email"
-        id="email"
-        required
-        onChange={formik.handleChange}
-        value={formik.values.email}
-      />
-    </Label>
-    <Label htmlFor="password">
-      Password
-      <AuthInput
-        type="password"
-        name="password"
-        id="password"
-        required
-        onChange={formik.handleChange}
-        value={formik.values.password}
-      />
-    </Label>
-    <Button type="submit">Register</Button>
-  </FormStyled>
+  <RegisterForm handleSubmit={formik.handleSubmit} values={formik.values} handleChange={formik.handleChange} />
   <LinkWraper>
     <Link to="/login">Go to SignIn</Link>
     <Link to="/forgot">Forgot password</Link>

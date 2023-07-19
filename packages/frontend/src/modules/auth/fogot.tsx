@@ -4,10 +4,11 @@
 // eslint-disable-next-line prettier/prettier
 import React from 'react';
 import { useFormik } from 'formik';
-import { AuthContainer, AuthInput, Button, FormStyled, Label, Link, Title } from './index.styled';
+import { AuthContainer, Link, } from './index.styled';
 import { UserSchemaLog } from '../todo/schemas/user.schema';
 import { IUserReset } from '../common/types/user.type';
 import { useResetPass } from './hooks/useResetPass';
+import { ForgotForm } from './components/authForms/forgot-form.component';
 
 const ForgotPageContainer = () => {
   const mutation = useResetPass();
@@ -24,21 +25,7 @@ const ForgotPageContainer = () => {
         validationSchema: UserSchemaLog
       });
 return <AuthContainer>
-  <FormStyled onSubmit={formik.handleSubmit}>
-    <Title>Reset password</Title>
-    <Label htmlFor="email">
-      Email
-      <AuthInput
-        type="text"
-        name="email"
-        id="email"
-        required
-        onChange={formik.handleChange}
-        value={formik.values.email}
-      />
-    </Label>
-    <Button type="submit">Reset</Button>
-  </FormStyled>
+  <ForgotForm handleSubmit={formik.handleSubmit} values={formik.values} handleChange={formik.handleChange} />
   <Link to="/login">Back to Login</Link>
 </AuthContainer>;
 };

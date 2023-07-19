@@ -6,7 +6,7 @@ import { APP_KEYS } from '../../common/consts';
 
 export const useCurrentUser = () => {
     const queryClient = useQueryClient();
-    const token = localStorage.getItem('token') as string;
+    const token = localStorage.getItem(APP_KEYS.STORAGE_KEYS.TOKEN) as string;
     const get = async () => {
             userService.setToken(token);
            const { data } = await userService.currentUser();

@@ -13,5 +13,5 @@ export const UserSchema = yup.object().shape({
 });
 export const UserSchemaLog = yup.object().shape({
   email: yup.string().matches(emailRule).required('Required!'),
-  password: yup.string().matches(passwordRule).required('Required!'),
+  password: yup.string().required('Required!'),
 });

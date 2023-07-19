@@ -4,6 +4,7 @@ import { useMutation } from 'react-query';
 import { Notify } from 'notiflix';
 import { userService } from '../../../service/user.service';
 import { IUserLog } from '../../common/types/user.type';
+import { APP_KEYS } from '../../common/consts';
 
 interface IRes {
     data:{
@@ -20,7 +21,7 @@ export const useLogUser = () => {
   const mutation = useMutation({
     mutationFn: async (user: IUserLog) => userService.login(user),
     onSuccess: (res:IRes) => {
-        localStorage.setItem('token', res.data.token);
+        localStorage.setItem(APP_KEYS.STORAGE_KEYS.TOKEN, res.data.token);
         userService.setToken(res.data.token);
         window.location.reload();
 },
