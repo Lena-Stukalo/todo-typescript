@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 /* eslint-disable guard-for-in */
 import { IUser } from '../types/user.type';
 import { Todo } from '../entities/todo.entity';
@@ -6,16 +7,26 @@ import { IParam, IParams, ISerch } from '../types/params.type';
 
 export default class TodoService {
   async findAll(user: IUser, params: IParams) {
-    const param = params as unknown as IParam;
+    const { page = 0, limits = 3 } = params;
+    const pagin = { page: Number(page), limits: Number(limits) };
+    const { isDone, isPrivate } = params;
+    const param = { isDone, isPrivate } as unknown as IParam;
     const serch: ISerch = {};
-    for (const key in params) {
+    for (const key in param) {
+      if (!param[key]) {
+        continue;
+      }
       if (param[key] === 'false') {
         serch[key] = false;
       } else {
         serch[key] = true;
       }
     }
-    const result = await Todo.find({ where: [{ ownerId: user.id, ...serch }] });
+    const result = await Todo.find({
+      where: [{ ownerId: user.id, ...serch }],
+      skip: pagin.page * pagin.limits,
+      take: pagin.limits
+    });
     return result;
   }
 
