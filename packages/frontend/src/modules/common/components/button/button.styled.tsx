@@ -12,6 +12,7 @@ export const ButtonStyled = styled('button')`
   font-size: ${theme.FONTS.SIZES.m};
   text-align: center;
   display: block;
+  margin-top: 10px;
 
   &:hover {
     background: ${theme.COLORS.white};

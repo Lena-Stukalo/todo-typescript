@@ -13,7 +13,7 @@ import {
     ButtonWraper,
     Wraper,
 } from './todo-info.styled';
-import { CustomChecbox } from '../../common/components/checkbox/checkbox.component';
+import { CustomCheckbox } from '../../common/components/checkbox/checkbox.component';
 import { APP_KEYS } from '../../common/consts';
 
 interface IProps {
@@ -47,11 +47,11 @@ export const TodoInfoComponent: React.FC<IProps> = ({
       <Wraper>
         <CheckBoxLabel>
           Done:
-          <CustomChecbox isTrue={card.isDone} />
+          <CustomCheckbox isTrue={card.isDone} />
         </CheckBoxLabel>
         <CheckBoxLabel>
           Private:
-          <CustomChecbox isTrue={card.isPrivate} />
+          <CustomCheckbox isTrue={card.isPrivate} />
         </CheckBoxLabel>
       </Wraper>
       <ButtonWraper>

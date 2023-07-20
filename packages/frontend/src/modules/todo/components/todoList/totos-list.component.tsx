@@ -17,7 +17,7 @@ export const TodoList: React.FC<IProps> = ({ cards, onDelete }) => (
         <StyledNavLink to={`/todo/${todo.id}`}>
           <TodoCard card={todo} />
         </StyledNavLink>
-        <Button onClick={() => { onDelete(todo.id); }} text="Delete" />
+        <Button onClick={() => { onDelete(todo.id); }} text="Delete" type="button" />
       </Wraper>
         ))}
   </List>

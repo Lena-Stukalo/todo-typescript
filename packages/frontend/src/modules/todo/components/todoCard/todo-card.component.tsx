@@ -7,7 +7,7 @@ import {
     CheckBoxLabel,
     Wraper,
 } from './todo-card.styled';
-import { CustomChecbox } from '../../../common/components/checkbox/checkbox.component';
+import { CustomCheckbox } from '../../../common/components/checkbox/checkbox.component';
 import { ITodo } from '../../../common/types/todo.types';
 
 interface IProps {
@@ -20,11 +20,11 @@ export const TodoCard: React.FC<IProps> = ({ card }) => (
     <Wraper>
       <CheckBoxLabel>
         Done
-        <CustomChecbox isTrue={card.isDone} />
+        <CustomCheckbox isTrue={card.isDone} />
       </CheckBoxLabel>
       <CheckBoxLabel>
         Private
-        <CustomChecbox isTrue={card.isPrivate} />
+        <CustomCheckbox isTrue={card.isPrivate} />
       </CheckBoxLabel>
     </Wraper>
   </Card>

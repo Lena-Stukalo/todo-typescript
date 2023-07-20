@@ -1,10 +1,21 @@
+/* eslint-disable guard-for-in */
 import { IUser } from '../types/user.type';
 import { Todo } from '../entities/todo.entity';
 import { ITodo, ITodoUser } from '../types/todos.type';
+import { IParam, IParams, ISerch } from '../types/params.type';
 
 export default class TodoService {
-  async findAll(user: IUser) {
-    const result = await Todo.findBy({ ownerId: user.id });
+  async findAll(user: IUser, params: IParams) {
+    const param = params as unknown as IParam;
+    const serch: ISerch = {};
+    for (const key in params) {
+      if (param[key] === 'false') {
+        serch[key] = false;
+      } else {
+        serch[key] = true;
+      }
+    }
+    const result = await Todo.find({ where: [{ ownerId: user.id, ...serch }] });
     return result;
   }
 

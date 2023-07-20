@@ -2,34 +2,37 @@
 import React from 'react';
 import {
   CheckboxContainer,
+  Checkmark,
+  CheckboxInput,
   CheckmarkCircle,
-  CheckmarkCard,
-  CheckboxInputCard,
 } from './checkbox.styled';
 
 interface IProps {
-  isTrue?: boolean;
-  isAble?: boolean;
-  onChange?: Function;
-  name?: string;
+  name: string;
+  value: string;
+  onChange: Function;
+  checked: boolean;
+  disabled: boolean;
+
 }
-export const CustomCheckbox: React.FC<IProps> = ({
-  isTrue,
-  isAble,
+export const FilterCustomChecbox: React.FC<IProps> = ({
+  value,
   name,
   onChange,
+  checked,
+  disabled
 }) => (
   <CheckboxContainer>
-    <CheckboxInputCard
+    <CheckboxInput
       type="checkbox"
-      checked={isTrue}
-      disabled={!isAble}
+      value={value}
       name={name}
-      value={isTrue}
       onChange={onChange}
+      checked={checked}
+      disabled={disabled}
     />
-    <CheckmarkCard>
+    <Checkmark>
       <CheckmarkCircle />
-    </CheckmarkCard>
+    </Checkmark>
   </CheckboxContainer>
 );

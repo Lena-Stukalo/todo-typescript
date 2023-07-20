@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import { User } from '../entities/user.entity';
 import { IUser, IUserLog, IUserReg, IUserReset } from '../types/user.type';
 import { createVerifyEmail } from '../helpers/createVerifyMail';
-import { sendMailTo } from '../helpers/sendEmaiil';
+import { sendMailTo } from '../helpers/sendEmail';
 import { RequestError } from '../helpers/RequestError';
 
 export default class UserService {

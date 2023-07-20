@@ -19,6 +19,7 @@ align-items: center;
   background-color: ${theme.COLORS.blue};
   font-size: ${theme.FONTS.SIZES.m};
   text-decoration: none;
+  margin-top: 10px;
 
   &:hover {
     background: ${theme.COLORS.white};
