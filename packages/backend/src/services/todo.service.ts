@@ -27,7 +27,10 @@ export default class TodoService {
       skip: pagin.page * pagin.limits,
       take: pagin.limits
     });
-    return result;
+    const count = await Todo.count({
+      where: [{ ownerId: user.id, ...serch }]
+    });
+    return { result, count };
   }
 
   async findById(id: string) {

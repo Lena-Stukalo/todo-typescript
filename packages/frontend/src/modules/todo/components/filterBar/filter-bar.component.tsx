@@ -9,8 +9,9 @@ import { APP_KEYS } from '../../../common/consts';
 
 interface IProps {
   onSubmit: Function;
+  setTodos: Function;
 }
-export const FilterBarComponent: React.FC<IProps> = ({ onSubmit }) => {
+export const FilterBarComponent: React.FC<IProps> = ({ onSubmit, setTodos }) => {
   const client = useQueryClient();
   const formValues = {
     isDone: false,
@@ -37,6 +38,7 @@ export const FilterBarComponent: React.FC<IProps> = ({ onSubmit }) => {
     }
     onSubmit(filters);
     client.removeQueries(APP_KEYS.QUERY_KEYS.TODOS);
+    setTodos({ result: [], count: 0 });
   };
   const formik = useFormik({
     initialValues: formValues,

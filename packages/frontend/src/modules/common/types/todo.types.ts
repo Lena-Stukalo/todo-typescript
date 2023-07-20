@@ -11,3 +11,7 @@ export interface ITodoNotId {
   isDone: boolean;
   isPrivate: boolean;
 }
+export interface ITodoRes {
+  result: ITodo[];
+  count: number;
+}

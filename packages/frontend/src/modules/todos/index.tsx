@@ -3,7 +3,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable prettier/prettier */
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, LinkWraper, TodosContainer } from './index.styled';
 import { useGetAllTodos } from '../todo/hooks/useGetAllTodos';
 import { Notification } from '../common/components/notification/notification.component';
@@ -23,11 +23,21 @@ const TodosPageContainer = () => {
     isDone: '',
     isPrivate: ''
   });
-    const { data, isLoading, isError } = useGetAllTodos(filters);
+  const [pagination, setPagination] = useState({
+    page: 0,
+    limits: 3
+  });
+  const [todos, setTodos] = useState({ result: [], count: 0 });
+    const { data, isLoading, isError } = useGetAllTodos({ ...filters, ...pagination });
     const { isOpen, toggle } = useToggle();
     const mutation = useCreateTodo();
     const deletion = useDeleteTodo();
     const navigate = useNavigate();
+ useEffect(() => {
+  if (data) {
+    setTodos((prev) => ({ result: [...prev.result, ...data.result], count: data.count }));
+  }
+ }, [data]);
     const toggleModal = () => {
         toggle();
     };
@@ -40,18 +50,25 @@ const TodosPageContainer = () => {
     const handleView = (id:string) => {
         navigate(`/todo/${id}`);
       };
-
     if (isLoading) {
         return <Loader />;
     }
     if (isError) {
         return <Notification text="!!!Error" />;
     }
-    if (data) {
+    if (todos) {
         return (
           <TodosContainer>
-            <FilterBarComponent onSubmit={setFilters} />
-            {!data.length ? <Notification text="You dont have any todo" /> : <TodoContent data={data} onDelete={onDelete} onView={handleView} />}
+            <FilterBarComponent onSubmit={setFilters} setTodos={setTodos} />
+            {!data.result.length ? <Notification text="You dont have any todo" /> : <TodoContent
+              data={todos.result}
+              datatable={data.result}
+              onDelete={onDelete}
+              onView={handleView}
+              onLoadMore={setPagination}
+              pagin={pagination}
+              count={data.count}
+            />}
             <LinkWraper>
               <Button text="Add todo" onClick={toggleModal} type="button" />
               <Link to="/profile">Profile</Link>
