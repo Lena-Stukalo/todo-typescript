@@ -5,7 +5,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { AuthContainer, AuthInput, Button, FormStyled, Label, Link, Title, LinkWraper } from './index.styled';
-import { UserSchemaLog } from '../todo/schemas/user.schema';
+import { UserSchemaChange } from '../todo/schemas/user.schema';
 import { IUserChange } from '../common/types/user.type';
 import { useChangePass } from './hooks/useCangePass';
 import { useLogOut } from './hooks/useLogOut';
@@ -26,7 +26,7 @@ const ProfilePageContainer = () => {
       const formik = useFormik({
         initialValues: formValues,
         onSubmit: handeleSubmit,
-        validationSchema: UserSchemaLog
+        validationSchema: UserSchemaChange
       });
 return <AuthContainer>
   <FormStyled onSubmit={formik.handleSubmit}>

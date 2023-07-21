@@ -15,3 +15,9 @@ export const UserSchemaLog = yup.object().shape({
   email: yup.string().matches(emailRule).required('Required!'),
   password: yup.string().required('Required!'),
 });
+export const UserSchemaChange = yup.object().shape({
+  password: yup.string().required('Required!'),
+});
+export const UserSchemaReset = yup.object().shape({
+  email: yup.string().matches(emailRule).required('Required!'),
+});

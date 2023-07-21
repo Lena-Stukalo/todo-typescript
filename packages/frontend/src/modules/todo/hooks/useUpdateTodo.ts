@@ -13,7 +13,10 @@ export const useUpdateTodo = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async (config: IConfig) => todoService.updateTodo(config.id, config.todo),
-    onSuccess: () => queryClient.removeQueries([APP_KEYS.QUERY_KEYS.TODO])
+    onSuccess: () => {
+queryClient.removeQueries([APP_KEYS.QUERY_KEYS.TODO]);
+      queryClient.removeQueries([APP_KEYS.QUERY_KEYS.TODOS]);
+}
   });
   return mutation;
 };
