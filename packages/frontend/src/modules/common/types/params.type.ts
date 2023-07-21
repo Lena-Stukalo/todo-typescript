@@ -1,3 +1,10 @@
 export type TParam = {
-  [x: string]: string;
+  isDone: string;
+  isPrivate: string;
+  page: number;
+  limits: number;
+};
+export type TParamHook = {
+  isDone: string;
+  isPrivate: string;
 };

@@ -50,7 +50,7 @@ export const TodoFormComponent: React.FC<IProps> = ({
     <FormStyled onSubmit={formik.handleSubmit}>
       <Title>{text}</Title>
       <Label htmlFor="title">
-        Nickname
+        Title
         <ModalInput
           type="text"
           name="title"

@@ -6,7 +6,8 @@ interface IProps {
   text: string;
   onClick?: Function;
   type:string;
+  disabled?:boolean;
 }
-export const Button: React.FC<IProps> = ({ text, onClick, type }) => (
-  <ButtonStyled onClick={onClick} type={type}>{text}</ButtonStyled>
+export const Button: React.FC<IProps> = ({ text, onClick, type, disabled }) => (
+  <ButtonStyled onClick={onClick} type={type} disabled={disabled}>{text}</ButtonStyled>
 );
