@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import * as theme from '../../../theme';
 
 export const AuthContainer = styled.div`
-width:50%;
+width:100%;
 margin: 0 auto;
 padding: 40px;
 `;
